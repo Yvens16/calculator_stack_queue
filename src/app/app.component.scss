@@ -1,0 +1,67 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+button {
+  border: none;
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  font-size: 32px;
+  cursor: pointer;
+  &:active {
+    color: red;
+  }
+}
+.bg_orange {
+  background-color: #fd8900;
+  color: #fff;
+}
+.bg_normal {
+  background-color: #d9d9d9;
+  color: black;
+}
+.calculator {
+  padding: 14px;
+  width: 100vw;
+  height: 100vh;
+  max-width: 414px;
+  max-height: 896px;
+  p {
+    font-size: 40px;
+    span {
+      color: #fd8900;
+    }
+  }
+  &_result {
+    font-size: 64px;
+    text-align: right;
+  }
+  &_top_keys {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 42px;
+    margin-bottom: 48px;
+  }
+  &_middle_keys {
+    display: grid;
+    grid-template-columns: repeat(4, 75px);
+    row-gap: 48px;
+    justify-content: space-between;
+    align-content: space-between;
+  }
+  &_bottom_keys {
+    margin-top: 48px;
+    display: flex;
+    justify-content: space-between;
+    flex-basis: 66.66%;
+    .zero {
+      width: 191px;
+      border-radius: 20px;
+      text-align: left;
+      padding: 14px;
+    }
+  }
+}
