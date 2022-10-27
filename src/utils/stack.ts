@@ -13,7 +13,7 @@ export class Stack {
   emptyStack(){
     this.items = [];
   }
-  // Push an eleement to the stack
+  // Push an element to the stack
   push(element: number | Operator) {
     this.items.push(element);
   }
