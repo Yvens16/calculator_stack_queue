@@ -36,10 +36,10 @@ describe('AppComponent', () => {
     expect(calculator.queue.printQueue()).toBe('2 ');
     expect(calculator.tempStack.printStack()).toBe('+ ');
     calculator.getKey("X");
-    expect(calculator.tempStack.printStack()).toBe('+ X ');
+    expect(calculator.tempStack.printStack()).toBe('X ');
     calculator.getKey("-");
-    expect(calculator.tempStack.printStack()).toBe('+ - ');
-    expect(calculator.queue.printQueue()).toBe('2 X ');
+    expect(calculator.tempStack.printStack()).toBe('- ');
+    expect(calculator.queue.printQueue()).toBe('2 ');
   });
 
   it('Should empty the tempStack', () => {

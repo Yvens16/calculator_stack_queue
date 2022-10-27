@@ -70,16 +70,22 @@ export class AppComponent {
   }
 
   keySent = false;
+  prevKey: string =  "";
+  operators = ["X", "+", "-", "÷"];
   getKey(key: string) {
+    if(this.operators.includes(this.prevKey) && this.operators.includes(key)) {
+      this.tempStack.pop();
+    }
+    this.prevKey = key;
     if (key === "AC") {
       this.clearStackAndQueue();
       this.calculatorStack.emptyStack();
       this.result = 0;
       this.numberString = "0";
+      this.numberToDisplay = "0";
       return;
     }
     if (isNaN(parseFloat(key)) && key !== ".") {
-    console.log("bassainte @@@@@@@@@@@@@@@@@@@@", this.numberString);
     if (this.numberString !== "") this.keyManager(parseFloat(this.numberString));
       this.keyManager(key);
       this.keySent = true;
