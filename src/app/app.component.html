@@ -3,19 +3,43 @@
     <p><span>C</span>alculator</p>
   </div>
   <div class="calculator_result">
-    {{numberString}}
+    {{ numberString }}
   </div>
   <div class="calculator_top_keys">
-    <button (click)="getKey(key.value)" *ngFor="let key of topkeys"
-    [ngClass]="{'bg_orange' : key.type === 'operator', 'bg_normal': key.type === 'number'}">{{key.value}}</button>
+    <button
+      (click)="getKey(key.value)"
+      *ngFor="let key of topkeys"
+      [ngClass]="{
+        bg_orange: key.type === 'operator',
+        bg_normal: key.type === 'number'
+      }"
+    >
+      {{ key.value }}
+    </button>
   </div>
   <div class="calculator_middle_keys">
-    <button (click)="getKey(key.value)" *ngFor="let key of middleKeys"
-    [ngClass]="{'bg_orange' : key.type === 'operator', 'bg_normal': key.type === 'number'}">{{key.value}}</button>
+    <button
+      (click)="getKey(key.value)"
+      *ngFor="let key of middleKeys"
+      [ngClass]="{
+        bg_orange: key.type === 'operator',
+        bg_normal: key.type === 'number'
+      }"
+    >
+      {{ key.value }}
+    </button>
   </div>
   <div class="calculator_bottom_keys">
-    <button (click)="getKey(key.value)" *ngFor="let key of bottomkeys"
-    [ngClass]="{'bg_orange' : key.type === 'operator', 'bg_normal': key.type === 'number', 'zero': key.value === '0'}">
-    {{key.value}}</button>
+    <button
+      (click)="getKey(key.value)"
+      *ngFor="let key of bottomkeys"
+      [ngClass]="{
+        bg_orange: key.type === 'operator',
+        bg_normal: key.type === 'number',
+        zero: key.value === '0'
+      }"
+    >
+      {{ key.value }}
+    </button>
   </div>
 </div>

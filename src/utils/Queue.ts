@@ -1,7 +1,7 @@
-import { Operator } from "./stack";
+import { Operator } from './stack';
 export class Queue {
   items: Array<number | Operator> = [];
-  constructor() { }
+  constructor() {}
 
   emptyQueue() {
     this.items = [];
@@ -14,7 +14,9 @@ export class Queue {
 
   // Enqueue veut dire ajouter un element à la fin de la queue
   enqueue(number: number | Operator) {
+    console.log('number: ', number);
     this.items.push(number);
+    console.log('items : ', this.items);
   }
 
   // Dequeue veut dire retirer un element du début de la queue
@@ -22,20 +24,20 @@ export class Queue {
     if (!this.isEmpty()) {
       return this.items.shift();
     }
-    return "Queue Empty"
+    return 'Queue Empty';
   }
 
   ShowFirstInQueue() {
     if (!this.isEmpty()) {
       return this.items[0];
     }
-    return "Queue Empty";
+    return 'Queue Empty';
   }
 
   printQueue() {
-    let str = "";
+    let str = '';
     for (let i = 0; i < this.items.length; i++) {
-      str += this.items[i] + " ";
+      str += this.items[i] + ' ';
     }
     return str;
   }
@@ -43,12 +45,12 @@ export class Queue {
   getNextOperator() {
     let idx: number = 0;
     for (const token of this.items) {
-      if (typeof token !== "number") {
-        idx = this.items.indexOf(token)
+      if (typeof token !== 'number') {
+        idx = this.items.indexOf(token);
         break;
       }
     }
-    return this.items.splice(idx, 1)[0]; 
+    return this.items.splice(idx, 1)[0];
   }
 
   getSize() {
