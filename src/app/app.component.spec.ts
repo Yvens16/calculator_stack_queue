@@ -4,9 +4,7 @@ import { AppComponent } from './app.component';
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        AppComponent
-      ],
+      declarations: [AppComponent],
     }).compileComponents();
   });
 
@@ -29,67 +27,81 @@ describe('AppComponent', () => {
   //   expect(compiled.querySelector('.content span')?.textContent).toContain('calculator_stack_queue app is running!');
   // });
 
-  it("Should Add numbers to Queue and Operator to Stack by precedence", () => {
+  it('Should Add numbers to Queue and Operator to Stack by precedence', () => {
     const calculator = TestBed.createComponent(AppComponent).componentInstance;
-    calculator.keyManager(2);
-    calculator.keyManager("+");
+    calculator.getKey('2');
+    calculator.getKey('+');
     expect(calculator.queue.printQueue()).toBe('2 ');
     expect(calculator.tempStack.printStack()).toBe('+ ');
-    calculator.keyManager("*");
-    expect(calculator.tempStack.printStack()).toBe('+ * ');
-    calculator.keyManager("-");
-    expect(calculator.tempStack.printStack()).toBe('+ - ');
-    expect(calculator.queue.printQueue()).toBe('2 * ');
+    calculator.getKey('X');
+    expect(calculator.tempStack.printStack()).toBe('X ');
+    calculator.getKey('-');
+    expect(calculator.tempStack.printStack()).toBe('- ');
+    expect(calculator.queue.printQueue()).toBe('2 ');
+  });
+
+  it('Should calcul with number end with 0', () => {
+    const calculator = TestBed.createComponent(AppComponent).componentInstance;
+    calculator.getKey('2');
+    calculator.getKey('X');
+    calculator.getKey('3');
+    calculator.getKey('=');
+    expect(calculator.result).toEqual(6);
+    calculator.getKey('+');
+    calculator.getKey('2');
+    calculator.getKey('0');
+    calculator.getKey('=');
+    expect(calculator.result).toEqual(26);
   });
 
   it('Should empty the tempStack', () => {
     const calculator = TestBed.createComponent(AppComponent).componentInstance;
-    calculator.keyManager("+");
-    calculator.keyManager("*");
-    calculator.keyManager("-");
-    calculator.keyManager("*");
+    calculator.getKey('+');
+    calculator.getKey('X');
+    calculator.getKey('-');
+    calculator.getKey('X');
     calculator.EmptyStack();
     expect(calculator.tempStack.printStack()).toBe('');
-  })
+  });
 
-  it("Should calculate result", () => {
+  it('Should calculate result', () => {
     const calculator = TestBed.createComponent(AppComponent).componentInstance;
-    calculator.keyManager(2);
-    calculator.keyManager("*");
-    calculator.keyManager(3);
-    calculator.keyManager("=");
+    calculator.getKey('2');
+    calculator.getKey('X');
+    calculator.getKey('3');
+    calculator.getKey('=');
     expect(calculator.result).toEqual(6);
-    calculator.keyManager("+");
-    calculator.keyManager(2);
-    calculator.keyManager("=");
+    calculator.getKey('+');
+    calculator.getKey('2');
+    calculator.getKey('=');
     expect(calculator.result).toEqual(8);
-    calculator.keyManager("AC");
+    calculator.getKey('AC');
     expect(calculator.result).toEqual(0);
   });
 
-  it("Should calculate percentage", () => {
+  it('Should calculate percentage', () => {
     const calculator = TestBed.createComponent(AppComponent).componentInstance;
-    calculator.keyManager(2);
-    calculator.keyManager("+");
-    calculator.keyManager(2);
-    calculator.keyManager("%");
-    calculator.keyManager("=");
+    calculator.getKey('2');
+    calculator.getKey('+');
+    calculator.getKey('2');
+    calculator.getKey('%');
+    calculator.getKey('=');
     expect(calculator.result).toEqual(2.04);
-    calculator.keyManager("AC");
-    calculator.keyManager(2);
-    calculator.keyManager("-");
-    calculator.keyManager(2);
-    calculator.keyManager("%");
-    calculator.keyManager("=");
+    calculator.getKey('AC');
+    calculator.getKey('2');
+    calculator.getKey('-');
+    calculator.getKey('2');
+    calculator.getKey('%');
+    calculator.getKey('=');
     expect(calculator.result).toEqual(1.96);
-    calculator.keyManager("AC");
-    calculator.keyManager(2);
-    calculator.keyManager("+");
-    calculator.keyManager(2);
-    calculator.keyManager("%");
-    calculator.keyManager("+");
-    calculator.keyManager(2);
-    calculator.keyManager("="); 
+    calculator.getKey('AC');
+    calculator.getKey('2');
+    calculator.getKey('+');
+    calculator.getKey('2');
+    calculator.getKey('%');
+    calculator.getKey('+');
+    calculator.getKey('2');
+    calculator.getKey('=');
     expect(calculator.result).toEqual(4.04);
-  })
+  });
 });
