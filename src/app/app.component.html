@@ -3,7 +3,7 @@
     <p><span>C</span>alculator</p>
   </div>
   <div class="calculator_result">
-    {{numberString}}
+    {{numberToDisplay}}
   </div>
   <div class="calculator_top_keys">
     <button (click)="getKey(key.value)" *ngFor="let key of topkeys"

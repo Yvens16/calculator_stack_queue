@@ -14,7 +14,7 @@ export class AppComponent {
   topkeys = [{value:"AC", type: "operator"}, {value:"%", type: "operator"}, {value:"÷", type: "operator"}];
   middleKeys = [{value:"7", type: "number"}, {value:"8", type: "number"}, {value:"9", type: "number"}, {value:"X", type: "operator"}, {value:"4", type: "number"}, {value:"5", type: "number"}, {value:"6", type: "number"}, {value:"-", type: "operator"}, {value:"1", type: "number"}, {value:"2", type: "number"}, {value:"3", type: "number"},{value: "+", type: "operator"}];
   bottomkeys = [{value:"0", type: "number"}, {value:".", type: "number"}, {value: "=", type: "operator"}];
-  numberToDisplay: number = 0;
+  numberToDisplay: string = "0";
   numberString:string= '0';
   result: number = 0;
   title = 'calculator_stack_queue';
@@ -79,15 +79,19 @@ export class AppComponent {
       return;
     }
     if (isNaN(parseFloat(key)) && key !== ".") {
-      this.keyManager(parseFloat(this.numberString));
+    console.log("bassainte @@@@@@@@@@@@@@@@@@@@", this.numberString);
+    if (this.numberString !== "") this.keyManager(parseFloat(this.numberString));
       this.keyManager(key);
       this.keySent = true;
+      this.numberString = "";
     } else {
       if (this.numberString === "0" || this.keySent === true) {
         this.numberString = "";
+        this.numberToDisplay ="";
         this.keySent = false;
       }
       this.numberString += key;
+      this.numberToDisplay += key;
     }
   }
 
@@ -121,7 +125,8 @@ export class AppComponent {
     // Quand il n'y a plus rien dans la queue
     this.result = this.calculatorStack.peek() as number;
     console.log('this.result:', this.result)
-    this.numberString = `${this.result}`;
+    // this.numberString = `${this.result}`;
+    this.numberToDisplay = `${this.result}`;
     console.log('this.numberString:', this.numberString)
   }
 
@@ -158,7 +163,9 @@ export class AppComponent {
   addAllKeysToQueue(key: number | Operator | string) {
     // Ici dès qu'on rencontre un chiffre on le met dans la queue
     // Ensuite il y a 3 possibilités quand on rencontre un opérateur (voir ***)
-    if (this.isAnumber(key)) this.queue.enqueue(key as number);
+    if (this.isAnumber(key)) {
+      this.queue.enqueue(key as number);
+    }
     else {
       if (this.tempStack.isEmpty()) {
         // Soit la stack est vide donc on ajoute l'opérateur direct dans la pile ***
